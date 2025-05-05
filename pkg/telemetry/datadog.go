@@ -8,16 +8,20 @@ import (
 )
 
 type datadogClient struct {
-	client *statsd.Client
+	client statsd.ClientInterface
 }
 
 // NewDatadogClient creates a new Datadog statsd client with the given address and options.
-func NewDatadogClient(addr string, options ...statsd.Option) (Client, error) {
+func NewDatadog(addr string, options ...statsd.Option) (Client, error) {
 	c, err := statsd.New(addr, options...)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create datadog statsd client: %w", err)
 	}
 	return &datadogClient{client: c}, nil
+}
+
+func NewDatadogClient(client statsd.ClientInterface) Client {
+	return &datadogClient{client: client}
 }
 
 func (d *datadogClient) Count(name string, value int64, tags []string) {
