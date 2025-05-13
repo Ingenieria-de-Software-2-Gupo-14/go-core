@@ -25,18 +25,18 @@ func TestDatadogAPIClient(t *testing.T) {
 
 	// Test that the client methods don't panic
 	t.Run("count", func(t *testing.T) {
-		client.Count(context.Background(), "test.metric.count", 5, []string{"tag:value"})
+		client.Count(context.Background(), "test.metric.count", 5, "tag:value")
 	})
 
 	t.Run("increment", func(t *testing.T) {
-		client.Incr(context.Background(), "test.metric.incr", []string{"tag:value"})
+		client.Incr(context.Background(), "test.metric.incr", "tag:value")
 	})
 
 	t.Run("decrement", func(t *testing.T) {
-		client.Decr(context.Background(), "test.metric.decr", []string{"tag:value"})
+		client.Decr(context.Background(), "test.metric.decr", "tag:value")
 	})
 
 	t.Run("timing", func(t *testing.T) {
-		client.Timing(context.Background(), "test.metric.timing", 100*time.Millisecond, []string{"tag:value"})
+		client.Timing(context.Background(), "test.metric.timing", 100*time.Millisecond, "tag:value")
 	})
 }

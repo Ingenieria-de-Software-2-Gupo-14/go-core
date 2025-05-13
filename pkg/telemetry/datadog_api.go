@@ -69,7 +69,7 @@ func NewDatadogAPI(opts ...DatadogAPIOption) (Client, error) {
 }
 
 // Count tracks how many times something happened per second.
-func (c *datadogAPIClient) Count(ctx context.Context, name string, value int64, tags []string) {
+func (c *datadogAPIClient) Count(ctx context.Context, name string, value int64, tags ...string) {
 	metric := datadogV2.MetricSeries{
 		Metric: name,
 		Type:   datadogV2.METRICINTAKETYPE_COUNT.Ptr(),
@@ -91,17 +91,17 @@ func (c *datadogAPIClient) Count(ctx context.Context, name string, value int64, 
 }
 
 // Incr is just Count of 1.
-func (c *datadogAPIClient) Incr(ctx context.Context, name string, tags []string) {
-	c.Count(ctx, name, 1, tags)
+func (c *datadogAPIClient) Incr(ctx context.Context, name string, tags ...string) {
+	c.Count(ctx, name, 1, tags...)
 }
 
 // Decr is just Count of -1.
-func (c *datadogAPIClient) Decr(ctx context.Context, name string, tags []string) {
-	c.Count(ctx, name, -1, tags)
+func (c *datadogAPIClient) Decr(ctx context.Context, name string, tags ...string) {
+	c.Count(ctx, name, -1, tags...)
 }
 
 // Timing sends timing information, it is an alias for TimeInMilliseconds.
-func (c *datadogAPIClient) Timing(ctx context.Context, name string, value time.Duration, tags []string) {
+func (c *datadogAPIClient) Timing(ctx context.Context, name string, value time.Duration, tags ...string) {
 	metric := datadogV2.MetricSeries{
 		Metric: name,
 		Type:   datadogV2.METRICINTAKETYPE_UNSPECIFIED.Ptr(),
