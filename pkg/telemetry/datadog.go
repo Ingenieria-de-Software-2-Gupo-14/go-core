@@ -1,6 +1,7 @@
 package telemetry
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -24,19 +25,19 @@ func NewDatadogClient(client statsd.ClientInterface) Client {
 	return &datadogClient{client: client}
 }
 
-func (d *datadogClient) Count(name string, value int64, tags []string) {
+func (d *datadogClient) Count(_ctx context.Context, name string, value int64, tags []string) {
 	d.client.Count(name, value, tags, 1)
 }
 
-func (d *datadogClient) Incr(name string, tags []string) {
+func (d *datadogClient) Incr(_ctx context.Context, name string, tags []string) {
 	d.client.Incr(name, tags, 1)
 }
 
-func (d *datadogClient) Decr(name string, tags []string) {
+func (d *datadogClient) Decr(_ctx context.Context, name string, tags []string) {
 	d.client.Decr(name, tags, 1)
 }
 
-func (d *datadogClient) Timing(name string, value time.Duration, tags []string) {
+func (d *datadogClient) Timing(_ctx context.Context, name string, value time.Duration, tags []string) {
 	d.client.Timing(name, value, tags, 1)
 }
 
