@@ -2,9 +2,10 @@ package telemetry_test
 
 import (
 	"context"
-	"go-core/pkg/telemetry"
 	"testing"
 	"time"
+
+	"github.com/Ingenieria-de-Software-2-Gupo-14/go-core/pkg/telemetry"
 )
 
 func TestDatadogAPIClient(t *testing.T) {

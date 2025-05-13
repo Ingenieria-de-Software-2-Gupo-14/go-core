@@ -1,4 +1,4 @@
-module go-core
+module github.com/Ingenieria-de-Software-2-Gupo-14/go-core
 
 go 1.24.1
 
